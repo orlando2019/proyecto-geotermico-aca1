@@ -26,8 +26,8 @@ Este proyecto es una aplicación web interactiva que presenta un análisis del m
 3. Utilizar los botones de navegación en la parte inferior de cada página para avanzar o retroceder.
 4. Pasar el cursor sobre las **5 Fuerzas de Porter** (Página 2) o la palabra **entalpía** (Página 3) para descubrir información adicional a través de tooltips interactivos.
 
-## Autor
+## Autores
 
-**Orlando Ospino** (CUN - Especialización Gerencia Transición Energética)
+**Orlando Ospino** | **Maria Villegas** | **Jairo Serrano** | **Juan Rivera**  (CUN_2026 - Especialización Gerencia Transición Energética)
 
 _Nota: Este proyecto fue realizado para la asignatura "Competitividad Sistémica"._
