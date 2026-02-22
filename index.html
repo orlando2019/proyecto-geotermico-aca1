@@ -103,6 +103,8 @@
         transform: translateY(-50%);
         font-size: 60px;
         opacity: 0.2;
+        z-index: 1; /* Para enviar el icono atras */
+        pointer-events: none; /* Para evitar clicks accidentales encima */
       }
 
       /* Etiqueta del autor agregada */
@@ -459,7 +461,8 @@
         border: 6px solid transparent;
         border-top-color: var(--verde-oscuro);
       }
-      .porter-card:hover .tooltip-content {
+      .porter-card:hover .tooltip-content,
+      .tooltip-wrap:hover .tooltip-content {
         display: block;
       }
       .tooltip-label {
@@ -734,6 +737,45 @@
         background: linear-gradient(135deg, #546e5a, #263238);
       }
 
+      /* ── BANNER NAV ── */
+      .banner-nav {
+        display: flex;
+        gap: 10px;
+        position: absolute;
+        top: 25px; /* Bajarlos un poco del borde */
+        right: 5%; /* Alinearlos con el margen */
+        z-index: 50; /* Z-index mayor que header-icon (que no tiene o está absoluto detrás) */
+      }
+      .banner-btn {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.2s;
+        text-decoration: none;
+      }
+      .banner-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+      }
+      .tooltip-bottom {
+        bottom: auto !important;
+        top: calc(100% + 14px) !important;
+      }
+      .tooltip-bottom::after {
+        top: auto !important;
+        bottom: 100% !important;
+        border-top-color: transparent !important;
+        border-bottom-color: var(--verde-oscuro) !important;
+      }
+
       /* ── RESPONSIVE DESIGN (Nuevas reglas para pantallas pequeñas) ── */
       @media (max-width: 1024px) {
         .data-grid,
@@ -791,9 +833,15 @@
     <div class="page active" id="page1">
       <div class="page-header">
         <div class="page-header-content">
+          <div class="banner-nav">
+            <button class="banner-btn tooltip-wrap" onclick="showPage(2)">
+              ▶
+              <span class="tooltip-content tooltip-bottom">Análisis FODA y Porter</span>
+            </button>
+          </div>
           <div class="header-icon">🌋</div>
           <div class="header-badge">
-            ACA 1 · Competitividad Sistémica · CUN 2026
+            ACA 1 · Competitividad Sistémica · CUN Febrero 21 de 2026
           </div>
           <div class="header-title">
             Análisis del Microentorno — Proyecto Geotérmico<br />Valle de
@@ -955,7 +1003,7 @@
       <div class="page-footer">
         <div class="page-footer-content">
           <span class="footer-text"
-            >ACA1_CompetitividadSistemica_CUN_2026 &nbsp;|&nbsp; Especialización
+            >Desarrollado por Orlando Ospino &nbsp;|&nbsp; ACA1_CompetitividadSistemica_CUN_2026 &nbsp;|&nbsp; Especialización
             Gerencia Transición Energética</span
           >
           <div class="footer-links">
@@ -975,6 +1023,16 @@
     <div class="page" id="page2">
       <div class="page-header">
         <div class="page-header-content">
+          <div class="banner-nav">
+            <button class="banner-btn tooltip-wrap" onclick="showPage(1)">
+              ◀
+              <span class="tooltip-content tooltip-bottom">Presentación del Caso</span>
+            </button>
+            <button class="banner-btn tooltip-wrap" onclick="showPage(3)">
+              ▶
+              <span class="tooltip-content tooltip-bottom">Cadena de Valor y ESG</span>
+            </button>
+          </div>
           <div class="header-icon">🔍</div>
           <div class="header-badge">
             ACA 1 · Nivel Micro — Competitividad Sistémica
@@ -1135,7 +1193,7 @@
       <div class="page-footer">
         <div class="page-footer-content">
           <span class="footer-text"
-            >ACA1_CompetitividadSistemica_CUN_2026 &nbsp;|&nbsp; Especialización
+            >Desarrollado por Orlando Ospino &nbsp;|&nbsp; ACA1_CompetitividadSistemica_CUN_2026 &nbsp;|&nbsp; Especialización
             Gerencia Transición Energética</span
           >
           <div class="footer-links">
@@ -1154,6 +1212,16 @@
     <div class="page" id="page3">
       <div class="page-header">
         <div class="page-header-content">
+          <div class="banner-nav">
+            <button class="banner-btn tooltip-wrap" onclick="showPage(2)">
+              ◀
+              <span class="tooltip-content tooltip-bottom">Análisis FODA y Porter</span>
+            </button>
+            <button class="banner-btn tooltip-wrap" onclick="showPage(1)">
+              🏠
+              <span class="tooltip-content tooltip-bottom">Inicio de Presentación</span>
+            </button>
+          </div>
           <div class="header-icon">⚙️</div>
           <div class="header-badge">
             ACA 1 · Cadena de Valor · Benchmarking · ESG
@@ -1179,7 +1247,15 @@
             <div class="cadena-block">
               <h4>🔬 Exploración y Perforación</h4>
               <p>
-                Hasta 2 km · Alta entalpía confirmada · MoU Baker Hughes / ENEL
+                Hasta 2 km · Alta 
+                <span class="tooltip-wrap" style="color: var(--verde-acento); border-bottom: 1px dotted var(--verde-acento); cursor: help; font-weight: bold; position: relative; display: inline-block;">
+                  entalpía
+                  <span class="tooltip-content" style="width: 280px; font-weight: normal; text-transform: none; left: 50%; bottom: calc(100% + 8px);">
+                    <span class="tooltip-label">Entalpía</span>
+                    Magnitud termodinámica que mide la energía total de un sistema, determinando su capacidad de intercambiar calor con el entorno. En geotermia, define si un reservorio es de alta entalpía (>150°C, apto para generación eléctrica) o baja entalpía (&lt;150°C, para usos térmicos directos).
+                  </span>
+                </span> 
+                confirmada · MoU Baker Hughes / ENEL
               </p>
             </div>
             <div class="cadena-arrow">→</div>
@@ -1340,13 +1416,16 @@
           <button class="nav-btn secondary" onclick="showPage(2)">
             ← Volver a FODA y Porter
           </button>
+          <button class="nav-btn" onclick="showPage(1)">
+            🏠 Inicio
+          </button>
         </div>
       </div>
 
       <div class="page-footer">
         <div class="page-footer-content">
           <span class="footer-text"
-            >ACA1_CompetitividadSistemica_CUN_2026 &nbsp;|&nbsp; Especialización
+            >Desarrollado por Orlando Ospino &nbsp;|&nbsp; ACA1_CompetitividadSistemica_CUN_2026 &nbsp;|&nbsp; Especialización
             Gerencia Transición Energética</span
           >
           <div class="footer-links">
